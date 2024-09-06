@@ -19,6 +19,7 @@ def main():
             
         screen.fill((0, 0, 0))
         player.draw(screen)  # Draw the player on the screen
+        player.update(dt)  # Update the player
         pygame.display.flip()
 
         # limit the framerate to 60 FPS
