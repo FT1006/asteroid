@@ -24,7 +24,6 @@ def main():
     Bullet.containers = (bullets, updatable, drawable)
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     asteroid_field = AsteroidField()  # Create a new AsteroidField object
-    bullets = pygame.sprite.Group()
 
     dt = 0
 
@@ -36,6 +35,12 @@ def main():
         for obj in updatable:
             obj.update(dt)
         
+        for obj in asteroids:
+            for bullet in bullets:
+                if obj.is_collision(bullet):
+                    obj.split()
+                    bullets.remove(bullet)  # Mark bullet for removal
+
         for obj in asteroids:
             if obj.is_collision(player):
                 print("Game Over!")
@@ -52,4 +57,4 @@ def main():
         dt = clock.tick(60) / 1000
 
 if __name__ == "__main__":
-    main()
+    main()  
